@@ -51,7 +51,7 @@ resource "aws_cloudwatch_log_metric_filter" "no_mfa_console_signin" {
   count = var.enabled ? 1 : 0
 
   name           = "NoMFAConsoleSignin"
-  pattern        = "{ ($.eventName = \"ConsoleLogin\") && ($.additionalEventData.SamlProviderArn != \"*OneLogin\") && ($.additionalEventData.MFAUsed != \"Yes\") }"
+  pattern        = "{ ($.eventName = \"ConsoleLogin\") && ($.additionalEventData.SamlProviderArn != \"*saml-provider/AWSSSO*\") && ($.additionalEventData.MFAUsed != \"Yes\") }"
   log_group_name = var.cloudtrail_log_group_name
 
   metric_transformation {
